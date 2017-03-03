@@ -1,0 +1,27 @@
+<main>
+  <div class="container register">
+  <h2 class="form">Sign Up</h2>
+    <section class="errors">
+        <ul>
+          {{# if hasErrors }}
+            {{# each messages }}
+              <p class="bg-danger">{{ this }}</p>
+            {{/each}}
+          {{/ if}}
+        </ul>
+      </section>
+    <form class="form" action="/user/signup" method="post">
+      <label >Name</label>
+        <input type="text"  placeholder="name" name="name" required="" autofocus="">
+      <label >Email address</label>
+        <input type="text" placeholder="Email" name="email" required="" autofocus="">
+      <label >Password</label>
+        <input type="password" placeholder="Password" name="password" required="">
+      <label >Password confirm</label>
+        <input type="password" placeholder="Password confirm" name="pwconf" required="">
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" >
+      <button class="btn waves-effect waves-light" type="submit">signup</button>
+    </form>
+</div>
+
+</main>

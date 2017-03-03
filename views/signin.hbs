@@ -1,0 +1,26 @@
+<main>
+  <div class="container">
+    <h1>{{title}}</h1>
+    <section class="errors">
+          <ul>
+            {{# if hasErrors }}
+              {{# each messages }}
+                <p class="bg-danger">{{ this }}</p>
+              {{/each}}
+            {{/ if}}
+          </ul>
+        </section>
+    <form action="/user/signin" method="post">
+      <h2>Please sign in :</h2>
+      <label >Email address</label>
+      <input type="text" placeholder="email" name="email" required="weretert" autofocus="">
+      <label >Password</label>
+      <input type="password" placeholder="Password" name="password" required="">
+      <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+      <button  type="submit" name="submit">Sign in</button>
+    </form>
+    <a href="/user/signup">I do not have an account yet</a>
+  </div>  
+</main>
+
+

@@ -6,13 +6,22 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('express-handlebars')
 var expressValidator = require('express-validator')
-var expressSession = require('express-session')
+var expressSession = require('express-session');
+var csrf = require('csurf');
+var passport = require('passport');
+var flash = require('connect-flash');
+
+var csrfProtect = csrf();
 
 var index = require('./routes/index');
-var users = require('./routes/users');
-var register = require('./routes/register');
+var user = require('./routes/user');
 
 var app = express();
+
+var mongoose = require('mongoose');
+mongoose.connect('localhost:27017/matcha');
+
+ require('./config/passport');
 
 // view engine setup
 app.engine('hbs',
@@ -26,15 +35,23 @@ app.set('view engine', 'hbs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false}));
+app.use(expressSession({secret:'max', saveUninitialized: false, resave: false}));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(csrfProtect);
 
+app.use(function(req, res, next){
+  res.locals.isConnect = req.isAuthenticated();
+  next();
+})
+
+app.use('/user', user);
 app.use('/', index);
-app.use('/users', users);
-app.use('/register', register);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
