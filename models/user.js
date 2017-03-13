@@ -27,4 +27,8 @@ schema.methods.validUserById = function(id) {
   return this.findById(id);
 }
 
+schema.methods.getUserById = function(id) {
+  return this.findById(id);
+}
+
 module.exports = mongoose.model('users', schema);

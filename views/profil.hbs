@@ -1,26 +1,49 @@
 <main>
 	<div class="container">
-	<div class="row">
       	<div class="card col s12 m4">
-          <div class="center-align"><h4>I am {{user.name}}<i class="fa fa-pencil right" aria-hidden="true"></i></h4> </div>
+          <div class="center-align"><h4>I am {{name}}<i class="fa fa-pencil right" aria-hidden="true"></i></h4> </div>
           <img src="http://lorempixel.com/200/200/people" alt="" class="circle responsive-img">
       	</div>
-      	<div class="card-panel teal col s12 m8">
-      	<i class="fa fa-pencil right" aria-hidden="true"></i>
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span>
+      	 <div class="card-panel teal col s12 m8">
+      		<i class="fa fa-pencil right" aria-hidden="true"></i>
+          <span class="white-text">{{bio}}</span>
         </div>
-        <div class="input-field col s12">
-    <select multiple>
-      <option value="" disabled selected>Choose your option</option>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-    </select>
-    <label>Materialize Multiple Select</label>
-  </div>
-      </div>
+         <div class="input-field">
+					 <div class="chips chips-placeholder"></div>
+					{{# each interest}}
+						<div class="chip">{{this}}</div>
+					{{/each}}
+  			</div>
+				<div class="input-field col s12 m6">
+					<label>Your gender</label><br><br>
+						<select class="browser-default">
+							<option value="m">M</option>
+							<option value="f">F</option>
+							<option value="x">other</option>
+						</select>
+	      </div>
+				<div class="input-field col s12 m6">
+					<label>Your are interest by</label><br><br>
+						<select class="browser-default">
+							<option value="m">M</option>
+							<option value="f">F</option>
+							<option value="x">All</option>
+						</select>
+	      </div>
+				<br>
+				<p>Age you prefer:</p>
+				<div id="html5" class="noUi-target noUi-ltr noUi-horizontal">
+					<div class="noUi-base"><div class="noUi-origin" style="left: 42.1118%;">
+						<div class="noUi-handle noUi-handle-lower" data-handle="0" style="z-index: 5;">
+						</div>
+					</div>
+					<div class="noUi-connect" style="left: 42.1118%; right: 23.9959%;">
+							</div>
+							<div class="noUi-origin" style="left: 76.0041%;">
+								<div class="noUi-handle noUi-handle-upper" data-handle="1" style="z-index: 4;">
+								</div>
+							</div>
+						</div>
+					</div>
 	</div>
 </main>
-

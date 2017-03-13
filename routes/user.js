@@ -12,9 +12,11 @@ router.get('/profile',isLoggedIn, function(req, res, next){
   var usersId = req._passport.session.user;
   if (usersId == req.user._id)
   {
-     console.log(req.user);
-     console.log('passport de litulisateyr',req._passport.session.user);
-     res.render('profil',{user:req.user});
+      User.findById(usersId, function (err, user) {
+      if (err) { throw err; }
+      console.log('User Is',user);
+      res.render('profil',user);
+   });
   }
 });
 
@@ -74,6 +76,9 @@ router.get('/signout', function(req, res, next){
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
+    res.io.sockets.on('connection', function(socket){
+      console.log('N UU');
+    });
     return next();
   }
   res.redirect('/')

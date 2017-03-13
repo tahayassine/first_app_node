@@ -29,5 +29,11 @@
                 <a href="#!" class="secondary-content"><i class="material-icons">send</i></a>
             </div>
         </li>
-    </ul>	
+    </ul>
 </main>
+<script>
+var socket = io('//'+document.location.hostname+':'+document.location.port);
+socket.on('messages', function(data) {
+                alert(data);
+        });
+</script>
