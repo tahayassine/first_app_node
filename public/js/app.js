@@ -6,16 +6,15 @@ $('.button-collapse').sideNav({
     }
   );
 
-  var slider = document.getElementById('test5');
-  noUiSlider.create(slider, {
-   start: [20, 80],
-   connect: true,
-   step: 1,
-   range: {
-     'min': 18,
-     'max': 100
-   },
-   format: wNumb({
-     decimals: 0
-   })
-  });
+  var html5Slider = document.getElementById('html5');
+
+noUiSlider.create(html5Slider, {
+	start: [ 10, 30 ],
+  direction: 'rtl',
+  step: 1,
+	connect: true,
+	range: {
+		'min': 20,
+		'max': 40
+	}
+});

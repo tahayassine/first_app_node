@@ -15,13 +15,17 @@ router.get('/profile',isLoggedIn, function(req, res, next){
       User.findById(usersId, function (err, user) {
       if (err) { throw err; }
       console.log('User Is',user);
+      user.interest.push('test', 'erray', 'whorck');
       res.render('profil',user);
    });
   }
 });
 
 router.get('/parameter', isLoggedIn, function(req, res, next){
-
+  User.findById(req._passport.session.user, function (err, user) {
+    if (err) { throw err; }
+    res.render('parameter', user);
+  });
 });
 
 router.get('/swap', isLoggedIn, function(req, res, next){
@@ -30,6 +34,10 @@ router.get('/swap', isLoggedIn, function(req, res, next){
 
 router.get('/tchats', isLoggedIn, function(req, res, next){
   res.render('tchats',{});
+});
+
+router.get('/tchatwith/:id', isLoggedIn, function(req, res, next){
+  res.render('tchat-with',{});
 });
 
 router.use('/', notLoggedIn, function(req, res, next){
