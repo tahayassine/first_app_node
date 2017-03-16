@@ -84,9 +84,9 @@ router.get('/signout', function(req, res, next){
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
-    res.io.sockets.on('connection', function(socket){
-      console.log('N UU');
-    });
+    // res.io.sockets.on('connection', function(socket){
+    //     socket.emit('message', 'Vous êtes bien connecté !');
+    // });
     return next();
   }
   res.redirect('/')
