@@ -29,7 +29,14 @@ router.get('/parameter', isLoggedIn, function(req, res, next){
 });
 
 router.get('/swap', isLoggedIn, function(req, res, next){
-  res.render('swap',{});
+  User.findById(req.user._id, (err, user) => {
+    if (err) { throw err; }
+    user = new User(user);
+    // user.gender ="M";
+    user.save();
+    console.log(user);
+    res.render('swap',{'user' : user});
+  });
 });
 
 router.get('/tchats', isLoggedIn, function(req, res, next){
@@ -84,9 +91,6 @@ router.get('/signout', function(req, res, next){
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
-    // res.io.sockets.on('connection', function(socket){
-    //     socket.emit('message', 'Vous êtes bien connecté !');
-    // });
     return next();
   }
   res.redirect('/')

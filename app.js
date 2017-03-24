@@ -20,11 +20,11 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
-
+// connect to mongodb
 var mongoose = require('mongoose');
 mongoose.connect('localhost:27017/matcha');
 
- require('./config/passport');
+require('./config/passport');
 
 // view engine setup
 app.engine('hbs',
@@ -40,6 +40,7 @@ app.use(function(req, res, next){
   res.io = io;
   next();
 });
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -57,8 +58,16 @@ app.use(function(req, res, next){
   next();
 })
 
+var User = require('./models/user');
+var Messages = require('./models/messages');
+var Likes = require('./models/likes');
+ // require('./config/io.js');
 io.sockets.on('connection', (socket)=>{
   console.log("nouveu etulisateur");
+  socket.on('likeUser', (data) => {
+    console.log("toi," + data.user + "tu vien de like:" + data.like);
+    socket.emit('message' , "je vous envoie nouveau match!")
+  });
 });
 
 app.use('/user', user);
