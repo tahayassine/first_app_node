@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var User = require('./user');
 var Schema = mongoose.Schema;
 
 var schema = new Schema({
@@ -6,5 +7,6 @@ var schema = new Schema({
   idUser: {type: String, required: true,},
   idUserLike: {type: String, required: true},
 }, {collection: 'likes'});
+
 
 module.exports = mongoose.model('likes', schema);

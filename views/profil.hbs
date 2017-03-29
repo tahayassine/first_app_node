@@ -1,29 +1,29 @@
 <main>
 	<div class="container row">
       	<div class="card col s12 m4">
-          <div class="center-align"><h4>I am {{name}}</h4> </div>
-          <img src="http://lorempixel.com/200/200/people" alt="" class="circle responsive-img">
+          <div class="center-align" ><h4>I am <span class="" id="name">{{user.name}}</span>	</h4> </div>
+          <img src="{{user.images.[0]}}" alt="" class="circle responsive-img">
       	</div>
       	 <div class="card-panel teal col s12 m8">
 					 <label>Bio</label><br><br>
-          <span class="white-text">{{bio}}lorem</span>
+          <span class="white-text" id="bio">{{user.bio}}lorem</span>
         </div>
          <div class="input-field">
 					 <!-- <div class="chips chips-placeholder"></div> -->
 					 <hr>
 					 <h5>Interest</h5>
-					{{# each interest}}
-						<div class="chip">{{this}}</div>
+					{{# each user.interest}}
+						<div class="chip" id="interest">{{this}}</div>
 					{{/each}}
 					<hr>
   			</div>
 				<div class="visite your profile">
 					<h5>Visite your profile</h5>
-					{{# each interest}}
-					<div class="chip">
+					{{# each user.vesitProfil}}
+					<div class="chip vesiteur">
 							<img src="http://lorempixel.com/20/20/people" alt="Contact Person">
-							Jane Doe
-						</div>
+							<span id="">Jane Doe</span>
+					</div>
 					{{/each}}
 				</div>
 				<a href="/user/parameter"><button  type="submit">parameter</button></a>

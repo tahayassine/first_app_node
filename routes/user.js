@@ -7,6 +7,13 @@ var User = require('../models/user');
 
 
 /* GET users listing. */
+var dataLayout = {
+  socket : true,
+}
+router.get('/logout', isLoggedIn, function(req, res, next){
+  req.logout();
+  res.redirect('/');
+});
 
 router.get('/profile',isLoggedIn, function(req, res, next){
   var usersId = req._passport.session.user;
@@ -14,9 +21,9 @@ router.get('/profile',isLoggedIn, function(req, res, next){
   {
       User.findById(usersId, function (err, user) {
       if (err) { throw err; }
-      console.log('User Is',user);
-      user.interest.push('test', 'erray', 'whorck');
-      res.render('profil',user);
+      dataLayout.user = user;
+      console.log('data layout',dataLayout);
+      res.render('profil',dataLayout);
    });
   }
 });
@@ -24,7 +31,8 @@ router.get('/profile',isLoggedIn, function(req, res, next){
 router.get('/parameter', isLoggedIn, function(req, res, next){
   User.findById(req._passport.session.user, function (err, user) {
     if (err) { throw err; }
-    res.render('parameter', user);
+    dataLayout.user = user;
+    res.render('parameter', dataLayout);
   });
 });
 
@@ -32,24 +40,24 @@ router.get('/swap', isLoggedIn, function(req, res, next){
   User.findById(req.user._id, (err, user) => {
     if (err) { throw err; }
     user = new User(user);
-    // user.gender ="M";
-    user.save();
-    console.log(user);
-    res.render('swap',{'user' : user});
+    dataLayout.user = user;
+    res.render('swap',dataLayout);
   });
 });
 
 router.get('/tchats', isLoggedIn, function(req, res, next){
-  res.render('tchats',{});
+  res.render('tchats',dataLayout);
 });
 
 router.get('/tchatwith/:id', isLoggedIn, function(req, res, next){
-  res.render('tchat-with',{});
+  res.render('tchat-with',dataLayout);
 });
 
 router.use('/', notLoggedIn, function(req, res, next){
   next();
 })
+
+
 
 router.get('/signup',notLoggedIn, function(req, res, next) {
     var messages = req.flash('error');
@@ -83,11 +91,6 @@ router.post('/signin', passport.authenticate('local.signin', {
   failureFlash: true
 }));
 
-
-router.get('/signout', function(req, res, next){
-  req.logout();
-  res.redirect('/');
-});
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {

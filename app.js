@@ -15,6 +15,7 @@ var csrfProtect = csrf();
 
 var index = require('./routes/index');
 var user = require('./routes/user');
+var install = require('./routes/install');
 
 var app = express();
 var server = require('http').createServer(app);
@@ -62,15 +63,23 @@ var User = require('./models/user');
 var Messages = require('./models/messages');
 var Likes = require('./models/likes');
  // require('./config/io.js');
+ 
+//instalation de la base de donne:
+// require('./install');
+
 io.sockets.on('connection', (socket)=>{
   console.log("nouveu etulisateur");
   socket.on('likeUser', (data) => {
     console.log("toi," + data.user + "tu vien de like:" + data.like);
-    socket.emit('message' , "je vous envoie nouveau match!")
+    socket.emit('message' , "je vous envoie nouveau match!");
   });
+  socket.on('newPosition', (postion) =>{
+    console.log("postion:\nlongitude: " +postion.lon+ "\nlatitude: "+ postion.lat);
+  })
 });
 
 app.use('/user', user);
+app.use('/install', install);
 app.use('/', index);
 
 // catch 404 and forward to error handler
