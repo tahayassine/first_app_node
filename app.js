@@ -63,18 +63,30 @@ var User = require('./models/user');
 var Messages = require('./models/messages');
 var Likes = require('./models/likes');
  // require('./config/io.js');
- 
+
 //instalation de la base de donne:
 // require('./install');
 
 io.sockets.on('connection', (socket)=>{
   console.log("nouveu etulisateur");
   socket.on('likeUser', (data) => {
+    user = new User();
+    // user = user.find({'name':'moi12'});
+    console.log(user);
     console.log("toi," + data.user + "tu vien de like:" + data.like);
-    socket.emit('message' , "je vous envoie nouveau match!");
+    socket.emit('newUser' , {'name': 'nouveau moui', 'bio': 'nouveau domage test un truck moui', 'tag' : ['test', 'plusier' ,'truck'], 'id': '35965468498432103202'});
   });
-  socket.on('newPosition', (postion) =>{
-    console.log("postion:\nlongitude: " +postion.lon+ "\nlatitude: "+ postion.lat);
+  socket.on('newPosition', (position) =>{
+    User.findById(position.user, (err, user) => {
+      if (err) { throw err; }
+      user = new User(user);
+      // user.position.lat = position.lat;
+      // user.position.lon = position.lon;
+      user.update({'position.lon': position.lon, 'position.lat': position.lat});
+      user.save();
+      console.log(user);
+      console.log("position: user id->"+position.user+"\nlongitude: " +position.lon+ "\nlatitude: "+ position.lat+"\n uptate!!!!!!!!!!!!!!");
+    });
   })
 });
 

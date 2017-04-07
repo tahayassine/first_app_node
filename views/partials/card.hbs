@@ -1,22 +1,33 @@
 <div class="container"style="height:100%">
+  <div class="preloader-wrapper big active center" style="display:none">
+    <div class="spinner-layer spinner-blue-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col s0 m3"></div>
     <div class="col s12 m6">
       <div class="card">
         <div class="card-image" >
           <img class="materialboxed" src="http://lorempixel.com/500/500/people">
-          <span class="card-title">name user</span>
+          <span class="card-title" id="cartName">name user</span>
         </div>
         <br>
         <div class="card-content">
         <h6>bio</h6>
-          <p>I am a very simple card. I am good at containing small bits of information.
+          <p id="cartBio">I am a very simple card. I am good at containing small bits of information.
           I am convenient because I require little markup to use effectively.</p>
         </div>
         <br>
         <div class="card-content">
         <h6>tag</h6>
-        <ul>
+        <ul id="cartTag">
           <div class="chip">Tag</div>
           <div class="chip">Tag</div>
           <div class="chip">Tag</div>
@@ -37,4 +48,5 @@
     </div>
     <div class="col s0 m3"></div>
   </div>
+  <span id="_idCart" style="display:none">id_test</span>
 </div>
